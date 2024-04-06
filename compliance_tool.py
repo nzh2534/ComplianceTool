@@ -2,6 +2,7 @@
 import PyPDF2
 import re
 import pandas as pd
+import os
 
 import gspread
 from df2gspread import df2gspread as d2g
@@ -12,7 +13,7 @@ from sub_header_fxn import sub_header_fxn
 def compliance_tool(file_path):
     creds_json = "googlesheets.json"
     sheet_name = "Compliance Tool"
-    spreadsheet_id = "1Rcpj_myqpIDSQDIfJZX0uDbTxMxrhP0hhvkepTeG0p4"
+    spreadsheet_id = os.environ.get('SHEET_ID') 
     scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name(creds_json,scope)
     client = gspread.authorize(creds)
